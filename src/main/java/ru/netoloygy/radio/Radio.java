@@ -3,9 +3,26 @@ public class Radio {
     public int currentRadioStation;
     public int minRadioStation = 0;
     public int maxRadioStation = 9;
+    public Radio(){
+
+    }
+    public Radio (int stationCount){
+        maxRadioStation = stationCount -1;
+    }
     public int getCurrentRadioStation() {
         return currentRadioStation;
     }
+    public int getMaxRadioStation() {
+        return maxRadioStation;
+    }
+//    public void setMaxRadioStation(int newMaxRadioStation){
+//        if (newMaxRadioStation <=0) {
+//            maxRadioStation = 9;
+//        }
+//        if (newMaxRadioStation > 0){
+//            maxRadioStation = newMaxRadioStation-1;
+//        }
+//    }
     public void setCurrentRadioStation(int newCurrentRadioStation){
         if (newCurrentRadioStation < minRadioStation) {
             return;

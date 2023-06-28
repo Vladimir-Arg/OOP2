@@ -157,6 +157,14 @@ class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldSetStationCount (){
+        Radio radio = new Radio(26);
+
+        int expected = 25;
+        int actual = radio.getMaxRadioStation();
+        Assertions.assertEquals(expected, actual);
+    }
 
 
 }
