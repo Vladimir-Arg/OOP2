@@ -1,12 +1,14 @@
 package ru.netoloygy.radio;
+
 public class Radio {
-    public int currentRadioStation;
-    public int minRadioStation = 0;
-    public int maxRadioStation = 9;
-    public int getCurrentRadioStation() {
-        return currentRadioStation;
-    }
-    public void setCurrentRadioStation(int newCurrentRadioStation){
+    private int currentRadioStation;
+    private int minRadioStation = 0;
+    private int maxRadioStation = 9;
+    private int minVolume = 0;
+    private int maxVolume = 100;
+    private int currentVolume;
+
+    public void setCurrentRadioStation(int newCurrentRadioStation) {
         if (newCurrentRadioStation < minRadioStation) {
             return;
         }
@@ -15,30 +17,25 @@ public class Radio {
         }
         currentRadioStation = newCurrentRadioStation;
     }
-    public void nextRadioStation(){
+
+    public void nextRadioStation() {
         if (currentRadioStation < maxRadioStation) {
             currentRadioStation++;
-        }
-        else {
+        } else {
             currentRadioStation = minRadioStation;
         }
     }
-    public void previousRadioStation(){
+
+    public void previousRadioStation() {
         if (currentRadioStation > minRadioStation) {
             currentRadioStation--;
-        }
-        else  {
+        } else {
             currentRadioStation = maxRadioStation;
         }
 
     }
-    public int minVolume = 0;
-    public int maxVolume = 100;
-    public int currentVolume;
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-    public void setCurrentVolume(int newCurrentVolume){
+
+    public void setCurrentVolume(int newCurrentVolume) {
         if (newCurrentVolume < minVolume) {
             return;
         }
@@ -47,20 +44,44 @@ public class Radio {
         }
         currentVolume = newCurrentVolume;
     }
-    public void volumeUp (){
+
+    public void volumeUp() {
         if (currentVolume < maxVolume) {
             currentVolume++;
-        }
-        else {
+        } else {
             currentVolume = currentVolume;
         }
     }
-    public void volumeDown(){
+
+    public void volumeDown() {
         if (currentVolume > minVolume) {
             currentVolume--;
-        }
-        else {
+        } else {
             currentVolume = currentVolume;
         }
+    }
+
+    public int getCurrentRadioStation() {
+        return currentRadioStation;
+    }
+
+    public int getMaxRadioStation() {
+        return maxRadioStation;
+    }
+
+    public int getMinRadioStation() {
+        return minRadioStation;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
     }
 }
