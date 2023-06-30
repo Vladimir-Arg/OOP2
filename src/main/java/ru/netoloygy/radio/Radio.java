@@ -1,10 +1,16 @@
 package ru.netoloygy.radio;
 public class Radio {
-    public int currentRadioStation;
-    public int minRadioStation = 0;
-    public int maxRadioStation = 9;
-    public int getCurrentRadioStation() {
-        return currentRadioStation;
+    private int currentRadioStation;
+    private int minRadioStation = 0;
+    private int maxRadioStation = 9;
+    private int minVolume = 0;
+    private int maxVolume = 100;
+    private int currentVolume;
+    public Radio(){
+
+    }
+    public Radio (int stationCount){
+        this.maxRadioStation = stationCount -1;
     }
     public void setCurrentRadioStation(int newCurrentRadioStation){
         if (newCurrentRadioStation < minRadioStation) {
@@ -32,12 +38,6 @@ public class Radio {
         }
 
     }
-    public int minVolume = 0;
-    public int maxVolume = 100;
-    public int currentVolume;
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
     public void setCurrentVolume(int newCurrentVolume){
         if (newCurrentVolume < minVolume) {
             return;
@@ -62,5 +62,23 @@ public class Radio {
         else {
             currentVolume = currentVolume;
         }
+    }
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+    public int getCurrentRadioStation() {
+        return currentRadioStation;
+    }
+    public int getMaxRadioStation() {
+        return maxRadioStation;
+    }
+    public int getMinRadioStation() {
+        return minRadioStation;
+    }
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+    public int getMinVolume() {
+        return minVolume;
     }
 }
