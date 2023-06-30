@@ -10,7 +10,7 @@ class RadioTest {
             Radio radio = new Radio();
             radio.setCurrentRadioStation(i);
             int expected = i;
-            int actual = radio.currentRadioStation;
+            int actual = radio.getCurrentRadioStation();
             Assertions.assertEquals(expected, actual);
         }
     }
@@ -19,7 +19,7 @@ class RadioTest {
             Radio radio = new Radio();
             radio.setCurrentRadioStation(-2);               // если передаем текущий канал больше максимального, то текущему каналу присвается "0".
                 int expected = 0;
-                int actual = radio.currentRadioStation;
+                int actual = radio.getCurrentRadioStation();
                 Assertions.assertEquals(expected, actual);
     }
     @Test
@@ -27,7 +27,7 @@ class RadioTest {
             Radio radio = new Radio();
             radio.setCurrentRadioStation(12);               // если передаем текущий канал больше максимального, то текущему каналу присвается "0".
             int expected = 0;
-            int actual = radio.currentRadioStation;
+            int actual = radio.getCurrentRadioStation();
             Assertions.assertEquals(expected, actual);
     }
 
@@ -38,7 +38,7 @@ class RadioTest {
             radio.setCurrentRadioStation(i);
             radio.nextRadioStation();
             int expected = i+1;
-            int actual = radio.currentRadioStation;
+            int actual = radio.getCurrentRadioStation();
             Assertions.assertEquals(expected, actual);
 
         }
@@ -46,10 +46,10 @@ class RadioTest {
     @Test
     public void shouldChangeNextRadioStationFromMaxStation() {
             Radio radio = new Radio();
-            radio.setCurrentRadioStation(radio.maxRadioStation);     // Текущий канал макисмальный, при перелистывании на слудеющий канал переходим на минимальный канал = "0"
+            radio.setCurrentRadioStation(radio.getMaxRadioStation());     // Текущий канал макисмальный, при перелистывании на слудеющий канал переходим на минимальный канал = "0"
             radio.nextRadioStation();
             int expected = 0;
-            int actual = radio.currentRadioStation;
+            int actual = radio.getCurrentRadioStation();
             Assertions.assertEquals(expected, actual);
 
 
@@ -57,12 +57,12 @@ class RadioTest {
 
     @Test
     public void shouldChangePreviousRadioStation() {
-        for (int i = 1; i <= 9; i++) {                     // тестируем диапазон каналов, в котором не требуется перескакивать между крайними значениями каналов
-            Radio radio = new Radio();
+        Radio radio = new Radio();
+        for (int i = 1; i < (radio.getMaxRadioStation()); i++) {                     // тестируем диапазон каналов, в котором не требуется перескакивать между крайними значениями каналов
             radio.setCurrentRadioStation(i);
             radio.previousRadioStation();
             int expected = i-1;
-            int actual = radio.currentRadioStation;
+            int actual = radio.getCurrentRadioStation();
             Assertions.assertEquals(expected, actual);
 
         }
@@ -70,10 +70,10 @@ class RadioTest {
     @Test
     public void shouldChangePreviousRadioStationFromMinStation() {
         Radio radio = new Radio();
-        radio.setCurrentRadioStation(0);                // Текущий канал минимальный, при перелистывании на предыдущий канал переходим на максимальный канал = "9"
+        radio.setCurrentRadioStation(radio.getMinRadioStation());                // Текущий канал минимальный, при перелистывании на предыдущий канал переходим на максимальный канал = "9"
         radio.previousRadioStation();
         int expected = 9;
-        int actual = radio.currentRadioStation;
+        int actual = radio.getCurrentRadioStation();
         Assertions.assertEquals(expected, actual);
     }
 
@@ -96,17 +96,17 @@ class RadioTest {
             radio.setCurrentVolume(i);
             radio.volumeUp();
             int expected = i+1;
-            int actual = radio.currentVolume;
+            int actual = radio.getCurrentVolume();
             Assertions.assertEquals(expected, actual);
         }
     }
     @Test
     public void shouldChangeVolumeUpFromMaxVolume() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(radio.maxVolume);     // Текущя громкость макисмум, приувеличении громкости ничего не должно происходить
+        radio.setCurrentVolume(radio.getMaxVolume());     // Текущя громкость макисмум, приувеличении громкости ничего не должно происходить
         radio.volumeUp();
-        int expected = radio.maxVolume;
-        int actual = radio.currentVolume;
+        int expected = radio.getMaxVolume();
+        int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
 
@@ -117,7 +117,7 @@ class RadioTest {
             radio.setCurrentVolume(i);
             radio.volumeDown();
             int expected = i-1;
-            int actual = radio.currentVolume;
+            int actual = radio.getCurrentVolume();
             Assertions.assertEquals(expected, actual);
 
         }
@@ -125,10 +125,10 @@ class RadioTest {
     @Test
     public void shouldChangeVolumeDownFromMinVolume() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(radio.minVolume);                // Текущий канал минимальный, при перелистывании на предыдущий канал переходим на максимальный канал = "9"
+        radio.setCurrentVolume(radio.getMinVolume());                // Текущий канал минимальный, при перелистывании на предыдущий канал переходим на максимальный канал = "9"
         radio.volumeDown();
-        int expected = radio.minVolume;
-        int actual = radio.currentVolume;
+        int expected = radio.getMinVolume();
+        int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
 
@@ -160,11 +160,8 @@ class RadioTest {
     @Test
     public void shouldSetStationCount (){
         Radio radio = new Radio(26);
-
         int expected = 25;
         int actual = radio.getMaxRadioStation();
         Assertions.assertEquals(expected, actual);
     }
-
-
 }
